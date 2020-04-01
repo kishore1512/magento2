@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+su www-data <<EOSU
+
+php /var/www/html/bin/magento sampledata:deploy
+
+php -d memory_limit=2G bin/magento sampledata:deploy
+
+php /var/www/html/bin/magento setup:upgrade
+
+php /var/www/html/bin/magento setup:di:compile
+
+php /var/www/html/bin/magento setup:static-content:deploy
+
+EOSU
